@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#menu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menuItem {
+  background-color: #ffaaaa;
+  color: #350a0a;
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 30px;
+  text-align: center;
+}
+
+.menuItem:hover {
+  cursor: pointer;
+  background-color: #f37575;
+}
+
+.active {
+  background-color: #f37575;
+  color: white;
+}
+
+#addRecipe,
+#book {
+  margin: 50px;
+}
+
+#submit {
+  background-color: #dedede;
+}
+
+#submit:hover {
+  cursor: pointer;
+  background-color: #c7c7c7;
+}
+
+@media only screen and (min-width: 1000px) {
+  #addRecipe,
+  #book {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+}

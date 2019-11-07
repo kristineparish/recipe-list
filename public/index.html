@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js" integrity="sha256-lrZTgsdM1iVdRigETFOU8u8/BmLX1ysQ8bzrULbuVFU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Recipes</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="menu">
+            <div class="menuItem" @click="deactivateAddRecipe()" v-bind:class="{ active : !addRecipeActive }">
+                <h1>Class Recipe Book</h1>
+                <h3>C S 260 Section 2</h3>
+            </div>
+            <div class="menuItem" @click="activateAddRecipe()" v-bind:class="{ active : addRecipeActive }">
+                <h1>Add A Recipe</h1>
+            </div>
+        </div>
+
+
+        <div id="addRecipe" v-show="addRecipeActive === true">
+            <p v-show="activeItems.length === 0">You are done with all your tasks! Good job!</p>
+            <form @submit.prevent="addItem">
+                <h5>Recipe Name:</h5>
+                <input type="text" v-model="name">
+
+                <h5>Category</h5>
+                <input type="radio" v-model="category" value="breakfast"> Breakfast<br>
+                <input type="radio" v-model="category" value="lunch"> Lunch<br>
+                <input type="radio" v-model="category" value="dinner"> Dinner<br>
+                <input type="radio" v-model="category" value="dessert"> Dessert<br>
+                <input type="radio" v-model="category" value="snack"> Snack<br>
+                <input type="radio" v-model="category" value="other"> Other
+
+                <h5>Ingredients:</h5>
+                <textarea rows="10" v-model="ingredients"></textarea>
+
+                <h5>Instructions:</h5>
+                <textarea rows="10" v-model="instructions"></textarea>
+
+                <h5>Contributor Name:</h5>
+                <input type="text" v-model="contributor" />
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div id="book" v-show="addRecipeActive === false">
+            <div class="controls">
+                <button @click="showAll()">Show All</button>
+                <button @click="showBreakfast()">Breakfast</button>
+                <button @click="showLunch()">Lunch</button>
+                <button @click="showDinner()">Dinner</button>
+                <button @click="showSnack()">Snack</button>
+                <button @click="showOther()">Other</button>
+            </div>
+            <div v-for="item in filteredItems">
+                <label :class="{ item: true, completed: item.completed }">
+          <p>{{ item.name }}</p>
+          <p>{{ item.ingredients }}</p>
+          <p>{{ item.instructions }}</p>
+          <p>{{ item.contributor }}</p>
+          <input type="checkbox" v-model="item.completed" @click="completeItem(item)" />
+          <span class="checkmark"></span>
+        </label>
+                <button @click="deleteItem(item)" class="delete">X</button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
