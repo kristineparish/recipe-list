@@ -50,28 +50,36 @@
         </div>
         <div id="book" v-show="addRecipeActive === false">
             <div class="controls">
-                <button @click="showAll()">Show All</button>
-                <button @click="showBreakfast()">Breakfast</button>
-                <button @click="showLunch()">Lunch</button>
-                <button @click="showDinner()">Dinner</button>
-                <button @click="showSnack()">Snack</button>
-                <button @click="showOther()">Other</button>
+                <button class="catButton" @click="showAll()">Show All</button>
+                <button class="catButton" @click="showBreakfast()">Breakfast</button>
+                <button class="catButton" @click="showLunch()">Lunch</button>
+                <button class="catButton" @click="showDinner()">Dinner</button>
+                <button class="catButton" @click="showSnack()">Snack</button>
+                <button class="catButton" @click="showOther()">Other</button>
             </div>
             <div v-for="item in filteredItems">
-                <label :class="{ item: true, completed: item.completed }">
-          <p>{{ item.name }}</p>
-          <p>{{ item.ingredients }}</p>
-          <p>{{ item.instructions }}</p>
-          <p>{{ item.contributor }}</p>
-          <input type="checkbox" v-model="item.completed" @click="completeItem(item)" />
-          <span class="checkmark"></span>
-        </label>
+                <br>
+                <br>
+                <hr>
                 <button @click="deleteItem(item)" class="delete">X</button>
+                <h3>{{ item.name }}</h3>
+                <br>
+                <h5>Ingredients</h5>
+                <p>{{ item.ingredients }}</p>
+                <br>
+                <h5>Instructions</h5>
+                <p>{{ item.instructions }}</p>
+                <br>
+                <p>-- {{ item.contributor }}</p>
             </div>
         </div>
 
 
     </div>
+
+    <footer>
+        <a href="https://github.com/kristineparish/recipe-list">GitHub Repo</a>
+    </footer>
 
     <script src="/script.js"></script>
 </body>

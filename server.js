@@ -30,6 +30,7 @@ app.post('/api/items', (req, res) => {
     let item = {
         id: id,
         name: req.body.name,
+        category: req.body.category,
         ingredients: req.body.ingredients,
         instructions: req.body.instructions,
         contributor: req.body.contributor,

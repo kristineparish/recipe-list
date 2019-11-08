@@ -22,23 +22,25 @@ var app = new Vue({
         filteredItems() {
             if (this.show === 'breakfast')
                 return this.items.filter(item => {
-                    return item.category = "breakfast";
+                    console.log("filtered breakfast items: " + item.category);
+                    console.log("items: " + this.items[0].category);
+                    return item.category === 'breakfast';
                 });
             if (this.show === 'lunch')
                 return this.items.filter(item => {
-                    return item.category = "lunch";
+                    return item.category === 'lunch';
                 });
             if (this.show === 'dinner')
                 return this.items.filter(item => {
-                    return item.category = "dinner";
+                    return item.category === 'dinner';
                 });
             if (this.show === 'snack')
                 return this.items.filter(item => {
-                    return item.category = "snack";
+                    return item.category === 'snack';
                 });
             if (this.show === 'other')
                 return this.items.filter(item => {
-                    return item.category = "other";
+                    return item.category === 'other';
                 });
             return this.items;
         },
@@ -48,17 +50,17 @@ var app = new Vue({
             try {
                 const response = await axios.post("/api/items", {
                     name: this.name,
+                    category: this.category,
                     ingredients: this.ingredients,
                     instructions: this.instructions,
                     contributor: this.contributor,
-                    category: this.category,
                 });
                 this.name = "";
-                this.category = "",
-                    this.ingredients = "",
-                    this.instructions = "",
-                    this.contributor = "",
-                    this.getItems();
+                this.category = "";
+                this.ingredients = "";
+                this.instructions = "";
+                this.contributor = "";
+                this.getItems();
             }
             catch (error) {
                 console.log(error);
@@ -107,7 +109,6 @@ var app = new Vue({
             try {
                 const response = await axios.get("/api/items");
                 this.items = response.data;
-                console.log(response.data);
             }
             catch (error) {
                 console.log(error);
